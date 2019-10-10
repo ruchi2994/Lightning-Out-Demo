@@ -3,8 +3,9 @@ var express = require('express'),
     request = require('request'),
     bodyParser = require('body-parser'),
     app = express();
+    var cors = require('cors');
 	
-var https = require('https');
+//var https = require('https');
 var fs = require('fs');
  
 	
@@ -17,18 +18,10 @@ app.use(bodyParser.json());
 app.set('port', process.env.PORT || 8080);
 
 /*Allow CORS*/
-app.use(function(req, res, next) {
-	 
-	res.setHeader('Access-Control-Allow-Origin', '*');
-	res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, X-Response-Time, X-PINGOTHER, X-CSRF-Token,Authorization,X-Authorization'); 
-	res.setHeader('Access-Control-Allow-Methods', '*');
-	res.setHeader('Access-Control-Expose-Headers', 'X-Api-Version, X-Request-Id, X-Response-Time');
-	res.setHeader('Access-Control-Max-Age', '1000');
-	  
-	next();
-});
-
-
+/*Allow CORS*/
+app.use(cors({
+  origin: 'http://localhost:8081'
+}));
 
 app.all('/proxy',  function(req, res, next) { 
     
@@ -64,5 +57,5 @@ app.listen(app.get('port'), function () {
       cert: fs.readFileSync('./server.crt', 'utf8')
    };
    
-	https.createServer(options, app).listen(8081);
-	console.log("Server listening for HTTPS connections on port ", 8081);
+	http.createServer(options, app).listen(8081);
+	console.log("Server listening for HTTP connections on port ", 8081);

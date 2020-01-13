@@ -15,19 +15,19 @@
       </main>
         <footer>
         </footer>
-        <script src="http://ab13.lightning.localhost.soma.force.com:6109/lightning/lightning.out.js"></script>
+        <script src="https://samesitetest-developer-edition.gus.force.com/samesite/lightning/lightning.out.js"></script>
         <script>
           //var url = "<%= ouathLightningURL %>";
           //var token = "Bearer "+"<%= oauthtoken %>";
           //console.log(token);
-            $Lightning.use("c:flowApplication", function() {
+            $Lightning.use("c:GuestFlow", function() {
                   $Lightning.createComponent("lightning:flow", {},
                      "leaderboard",
                       function(cmp) {
                          // do some stuff
-                         cmp.startFlow("guest_flow");
+                         cmp.startFlow("GuestFlow");
                       });
-            }, "http://ab13.localhost.soma.force.com:6109");
+            }, "https://samesitetest-developer-edition.gus.force.com/samesite");
         </script>
   </body>
 </html> 
